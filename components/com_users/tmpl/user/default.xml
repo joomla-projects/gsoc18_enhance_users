@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="user profile" option="userprogileOption">
+		<help
+			key = "User"
+		/>
+		<message>
+			<![CDATA[com_user_profile_view_default_desc]]>
+			User
+		</message>
+	</layout>
+</metadata>
+

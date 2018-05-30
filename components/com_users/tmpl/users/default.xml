@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="com_user_list_view_default_title" option="com_user_list_view_default_option">
+		<help
+			key = "Users"
+		/>
+		<message>
+			<![CDATA[com_user_profile_view_default_desc]]>
+			Users
+		</message>
+	</layout>
+</metadata>
+

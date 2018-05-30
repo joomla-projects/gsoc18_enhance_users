@@ -50,7 +50,7 @@ class UsersModel extends ListModel
 				'range',
 				'lastvisitrange',
 				'state',
-                'access', 'a.access', 'access_level',
+				'access', 'a.access', 'access_level',
 			);
 		}
 

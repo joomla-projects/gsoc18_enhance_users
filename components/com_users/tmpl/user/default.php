@@ -10,7 +10,13 @@
 defined('_JEXEC') or die;
 ?>
 
-<!--</div>-->
-blahhahahahaha
+<h2> User profile </h2>
 
-user profile
+	<div>
+		Name: <?php echo $this->item->name; ?>
+	</div>
+	<div>
+		Email: <?php echo $this->item->email; ?>
+
+	</div>
+

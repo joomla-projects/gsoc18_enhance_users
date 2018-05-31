@@ -12,13 +12,10 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\MVC\Model\ListModel;
 
-use Joomla\CMS\Component\ComponentHelper;
-use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
-
 /**
- * Profile model class for Users.
+ * Model class for list of users.
  *
- * @since  1.6
+ * @since 4.0
  */
 class UsersModel extends ListModel
 {
@@ -54,5 +51,4 @@ class UsersModel extends ListModel
 
 		return $query;
 	}
-	
 }

@@ -10,13 +10,10 @@ namespace Joomla\Component\Users\Site\View\Users;
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Helper\TagsHelper;
-use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
-use Joomla\Component\Users\Administrator\Helper\UsersHelper;
 
 /**
- * Profile view class for Users.
+ * Users List view class for Users.
  *
  * @since  1.6
  */

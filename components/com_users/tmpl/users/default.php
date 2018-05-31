@@ -9,6 +9,7 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Router\Route;
 use Joomla\CMS\HTML\HTMLHelper;
 
 
@@ -17,19 +18,16 @@ HTMLHelper::addIncludePath(JPATH_COMPONENT . '/helpers');
 $app = JFactory::getApplication();
 ?>
 
-hhahahahaha
-
-<div class="">
-
-<?php
-//var_dump($this->items);
-foreach ($this->items as $item) : ?>
-	<div >
-			<?php
-			echo $item->name;
-			?>
-
-	</div>
-<?php endforeach; ?>
+<div>
+	<?php foreach ($this->items as $item) : ?>
+		<div>
+			<a href="<?php echo Route::_('index.php?option=com_users&view=user&id=' . $item->id); ?>">
+				<?php
+				echo $item->name;
+				?>
+			</a>
+			<p> <?php echo $item->id; ?></p>
+		</div>
+	<?php endforeach; ?>
 </div>
 

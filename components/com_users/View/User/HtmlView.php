@@ -22,6 +22,12 @@ use Joomla\Component\Users\Administrator\Helper\UsersHelper;
  */
 class HtmlView extends BaseHtmlView
 {
+	/**
+	 * The article object
+	 *
+	 * @var  \stdClass
+	 */
+	protected $item;
 
 	/**
 	 * Execute and display a template script.
@@ -34,6 +40,10 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null)
 	{
+		$this->item  = $this->get('Item');
+//		var_dump($this->item);
+//		die;
+
 		return parent::display($tpl);
 	}
 }

@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\HTML\HTMLHelper;
+\JLoader::register('UsersHelperRoute', JPATH_SITE . '/components/com_users/helpers/route.php');
 
 
 HTMLHelper::addIncludePath(JPATH_COMPONENT . '/helpers');
@@ -21,7 +22,7 @@ $app = JFactory::getApplication();
 <div>
 	<?php foreach ($this->items as $item) : ?>
 		<div>
-			<a href="<?php echo Route::_('index.php?option=com_users&view=user&id=' . $item->id); ?>">
+			<a href="<?php echo Route::_(UsersHelperRoute::getUserRoute($item->id . ':' . $item->name)); ?>" itemprop="url">
 				<?php
 				echo $item->name;
 				?>

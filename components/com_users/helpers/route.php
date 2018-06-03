@@ -15,7 +15,7 @@ defined('_JEXEC') or die;
  * @since       1.6
  * @deprecated  4.0
  */
-class UsersHelperRoute
+abstract class UsersHelperRoute
 {
 	/**
 	 * Method to get the menu items for the component.
@@ -195,5 +195,19 @@ class UsersHelperRoute
 		}
 
 		return null;
+	}
+
+	/**
+	 * Method to get a route configuration for the user view
+	 *
+	 * @param   integer  $id      The route of the user item.
+	 *
+	 * @return  string  The user's route
+	 */
+	public static function getUserRoute($id)
+	{
+		$link = 'index.php?option=com_users&view=user&id=' . $id;
+
+		return $link;
 	}
 }

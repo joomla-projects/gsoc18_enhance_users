@@ -10,10 +10,8 @@ namespace Joomla\Component\Users\Site\View\User;
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Helper\TagsHelper;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
-use Joomla\Component\Users\Administrator\Helper\UsersHelper;
 
 /**
  * Profile view class for Users.
@@ -30,6 +28,21 @@ class HtmlView extends BaseHtmlView
 	protected $item;
 
 	/**
+	 * The page parameters
+	 *
+	 * @var    \Joomla\Registry\Registry|null
+	 * @since  4.0.0
+	 */
+	protected $params = null;
+
+	/**
+	 * The model state
+	 *
+	 * @var  \JObject
+	 */
+	protected $state;
+
+	/**
 	 * Execute and display a template script.
 	 *
 	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
@@ -40,7 +53,19 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null)
 	{
+		$app        = \JFactory::getApplication();
 		$this->item  = $this->get('Item');
+		$this->state      = $this->get('State');
+
+		// Process the content plugins.
+		PluginHelper::importPlugin('content');
+		$offset = $this->state->get('list.offset');
+
+		// Store the events for later
+		$this->item->event = new \stdClass;
+
+		$results = $app->triggerEvent('onContentBeforeDisplay', array('com_users.user', &$this->item, &$this->item->params), $offset);
+		$this->item->event->beforeDisplayContent = trim(implode("\n", $results));
 
 		return parent::display($tpl);
 	}

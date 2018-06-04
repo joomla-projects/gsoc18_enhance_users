@@ -29,6 +29,14 @@ class UserModel extends ItemModel
 		// Load state from the request.
 		$pk = $app->input->getInt('id');
 		$this->setState('user.id', $pk);
+
+		$offset = $app->input->getUInt('limitstart');
+		$this->setState('list.offset', $offset);
+
+		// Load the parameters.
+		$params = $app->getParams();
+		$this->setState('params', $params);
+
 	}
 
 	/**
@@ -56,7 +64,7 @@ class UserModel extends ItemModel
 				$query = $db->getQuery(true)
 					->select(
 						$this->getState(
-							'item.select', 'a.id, a.name, a.email'
+							'item.select', 'a.id, a.name, a.username, a.email'
 						)
 					);
 				$query->from('#__users AS a')
@@ -68,7 +76,7 @@ class UserModel extends ItemModel
 
 				if (empty($data))
 				{
-					throw new \Exception(\JText::_('COM_CONTENT_ERROR_ARTICLE_NOT_FOUND'), 404);
+					throw new \Exception(\JText::_('COM_USERS_ERROR_USER_NOT_FOUND'), 404);
 				}
 
 				$this->_item[$pk] = $data;

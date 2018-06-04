@@ -11,6 +11,8 @@ namespace Joomla\Component\Users\Site\View\Users;
 defined('_JEXEC') or die;
 
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
+use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\CMS\Application\ApplicationHelper;
 
 /**
  * Users List view class for Users.
@@ -42,7 +44,23 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null)
 	{
+		$app        = \JFactory::getApplication();
 		$this->items  = $this->get('Items');
+
+		PluginHelper::importPlugin('content');
+
+		// Create "blog" category.
+
+		foreach ($this->items as $item)
+		{
+			$item->slug = $item->id . ":" . ApplicationHelper::stringURLSafe($item->name);
+
+			// Store the events for later
+			$item->event = new \stdClass;
+
+			$results = $app->triggerEvent('onContentBeforeDisplay', array('com_users.user', &$item, &$item->params));
+			$item->event->beforeDisplayContent = trim(implode("\n", $results));
+		}
 
 		return parent::display($tpl);
 	}

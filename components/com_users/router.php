@@ -44,8 +44,12 @@ class UsersRouter extends RouterView
 		$this->registerView(new RouterViewConfiguration('remind'));
 		$this->registerView(new RouterViewConfiguration('reset'));
 
+		$users = new RouterViewConfiguration('users');
+		$users->setKey('id');
+		$this->registerView($users);
+
 		$user = new RouterViewConfiguration('user');
-		$user->setKey('id');
+		$user->setKey('id')->setParent($users, 'usrid');
 		$this->registerView($user);
 
 		parent::__construct($app, $menu);

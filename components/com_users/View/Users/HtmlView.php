@@ -49,8 +49,6 @@ class HtmlView extends BaseHtmlView
 
 		PluginHelper::importPlugin('content');
 
-		// Create "blog" category.
-
 		foreach ($this->items as $item)
 		{
 			$item->slug = $item->id . ":" . ApplicationHelper::stringURLSafe($item->name);

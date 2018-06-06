@@ -200,13 +200,20 @@ abstract class UsersHelperRoute
 	/**
 	 * Method to get a route configuration for the user view
 	 *
-	 * @param   integer  $id      The route of the user item.
+	 * @param   integer $id        The route of the user item.
+	 * @param   integer $groupId   The id of the group.
+	 * @param   integer $language  The language code.
 	 *
 	 * @return  string  The user's route
 	 */
-	public static function getUserRoute($id)
+	public static function getUserRoute($id, $groupId, $language)
 	{
-		$link = 'index.php?option=com_users&view=user&id=' . $id;
+		$link = 'index.php?option=com_users&view=user&id=' . $id . '&groupId=' . $groupId;
+
+		if ($language && $language !== '*' && JLanguageMultilang::isEnabled())
+		{
+			$link .= '&lang=' . $language;
+		}
 
 		return $link;
 	}

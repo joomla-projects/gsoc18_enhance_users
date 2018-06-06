@@ -21,11 +21,38 @@ class UsersModel extends ListModel
 {
 
 	/**
+	 * Method to auto-populate the model state.
+	 *
+	 * This method should only be called once per instantiation and is designed
+	 * to be called on the first call to the getState() method unless the model
+	 * configuration flag to ignore the request is set.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @param   string  $ordering   An optional ordering field.
+	 * @param   string  $direction  An optional direction (asc|desc).
+	 *
+	 * @return  void
+	 *
+	 * @since   12.2
+	 */
+	protected function populateState($ordering = 'ordering', $direction = 'ASC')
+	{
+		$app = \JFactory::getApplication();
+
+		// List state information
+		$groupId = $app->input->get('id');
+		$this->setState('user.group', $groupId);
+
+		parent::populateState($ordering = 'ordering', $direction = 'ASC');
+	}
+
+	/**
 	 * @return \JDatabaseQuery|\Joomla\Database\DatabaseQuery
 	 */
 	protected function getListQuery()
 	{
-		// Get the current user for authorisation checks
+		$app = \JFactory::getApplication();
 		$user = \JFactory::getUser();
 
 		// Create a new query object.
@@ -34,13 +61,12 @@ class UsersModel extends ListModel
 
 		// Select the required fields from the table.
 		$query->select(
-			$this->getState(
-				'list.select',
-				' a.id, a.name, a.username, a.email, a.access'
-			)
+			' a.id, a.name, a.username, a.email, a.access, map.group_id'
 		);
 
-		$query->from('#__users AS a');
+		$query->from($db->quoteName('#__users') . ' AS a')
+			->leftJoin($db->quoteName('#__user_usergroup_map') . ' AS map ON a.id = map.user_id')
+			->where('map.group_id = (' . $this->getState('user.group') . ')');
 
 		// Filter by access level.
 		if ($this->getState('filter.access', true))
@@ -49,6 +75,10 @@ class UsersModel extends ListModel
 			$query->where('a.access IN (' . $groups . ')');
 		}
 
+		$params = $app->getParams();
+		$this->setState('params', $params);
+
 		return $query;
 	}
+
 }

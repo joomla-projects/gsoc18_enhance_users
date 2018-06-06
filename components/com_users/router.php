@@ -49,7 +49,7 @@ class UsersRouter extends RouterView
 		$this->registerView($users);
 
 		$user = new RouterViewConfiguration('user');
-		$user->setKey('id')->setParent($users, 'usrid');
+		$user->setKey('id')->setParent($users, 'groupId');
 		$this->registerView($user);
 
 		parent::__construct($app, $menu);
@@ -57,6 +57,19 @@ class UsersRouter extends RouterView
 		$this->attachRule(new MenuRules($this));
 		$this->attachRule(new StandardRules($this));
 		$this->attachRule(new NomenuRules($this));
+	}
+
+	/**
+	 * Method to get the segment(s) for a category
+	 *
+	 * @param   string  $id     ID of the category to retrieve the segments for
+	 * @param   array   $query  The request that is built right now
+	 *
+	 * @return  array|string  The segments of this item
+	 */
+	public function getUsersSegment($id, $query)
+	{
+		return array((int) $id => $id);
 	}
 
 	/**

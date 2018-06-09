@@ -10,10 +10,11 @@
 defined('_JEXEC') or die;
 ?>
 
-<h2> User profile </h2>
-	<div>
+	<h2>
 		Name: <?php echo $this->item->name; ?>
-	</div>
+	</h2>
+	<?php echo $this->item->event->afterDisplayTitle; ?>
+	<?php echo $this->item->event->beforeDisplayContent; ?>
 	<div>
 		Username: <?php echo $this->item->username; ?>
 	</div>
@@ -24,4 +25,5 @@ defined('_JEXEC') or die;
 	<div>
 		<b>Custom fields:</b>
 	</div>
-	<?php echo $this->item->event->beforeDisplayContent; ?>
+
+	<?php echo $this->item->event->afterDisplayContent; ?>

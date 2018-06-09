@@ -64,8 +64,14 @@ class HtmlView extends BaseHtmlView
 		// Store the events for later
 		$this->item->event = new \stdClass;
 
-		$results = $app->triggerEvent('onContentBeforeDisplay', array('com_users.user', &$this->item, &$this->item->params), $offset);
+		$results = $app->triggerEvent('onContentAfterTitle', array('com_users.user', &$this->item, &$this->item->params, $offset));
+		$this->item->event->afterDisplayTitle = trim(implode("\n", $results));
+
+		$results = $app->triggerEvent('onContentBeforeDisplay', array('com_users.user', &$this->item, &$this->item->params, $offset));
 		$this->item->event->beforeDisplayContent = trim(implode("\n", $results));
+
+		$results = $app->triggerEvent('onContentAfterDisplay', array('com_users.user', &$this->item, &$this->item->params, $offset));
+		$this->item->event->afterDisplayContent = trim(implode("\n", $results));
 
 		return parent::display($tpl);
 	}

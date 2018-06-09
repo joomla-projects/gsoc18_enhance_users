@@ -17,13 +17,17 @@ $lang  = JFactory::getLanguage();
 
 <div>
 	<?php foreach ($this->items as $item) : ?>
+		<?php echo $this->item->event->afterDisplayTitle; ?>
 		<div>
+			<?php echo $item->event->beforeDisplayContent; ?>
+
 			<a href="<?php echo Route::_(UsersHelperRoute::getUserRoute($item->slug, $item->group_id, $lang)); ?>" itemprop="url">
 				<?php echo $item->name; ?>
 			</a>
 			<p> <?php echo $item->id; ?></p>
 		</div>
-		<?php echo $item->event->beforeDisplayContent; ?>
+
+		<?php echo $item->event->afterDisplayContent; ?>
 
 	<?php endforeach; ?>
 </div>

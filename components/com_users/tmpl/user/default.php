@@ -9,21 +9,41 @@
 
 defined('_JEXEC') or die;
 ?>
-
-	<h2>
-		Name: <?php echo $this->item->name; ?>
-	</h2>
-	<?php echo $this->item->event->afterDisplayTitle; ?>
-	<?php echo $this->item->event->beforeDisplayContent; ?>
-	<div>
-		Username: <?php echo $this->item->username; ?>
+<div class="item-page">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h2 itemprop="headline">
+					<?php echo $this->item->name; ?>
+				</h2>
+			</div>
+		</div>
 	</div>
-	<div>
-		Email: <?php echo $this->item->email; ?>
+	<div class="row">
+		<div class="col-md-4">
+			image
+		</div>
+		<div class="col-md-8">
+			<?php echo $this->item->event->afterDisplayTitle; ?>
+		</div>
 	</div>
 
-	<div>
-		<b>Custom fields:</b>
+	<div class="row">
+		<div class="col-md-12">
+			<?php echo $this->item->event->beforeDisplayContent; ?>
+		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<p><?php echo $this->item->username; ?></p>
+			<p><?php echo $this->item->email; ?></p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<?php echo $this->item->event->afterDisplayContent; ?>
+		</div>
+	</div>
+</div>
 
-	<?php echo $this->item->event->afterDisplayContent; ?>
+

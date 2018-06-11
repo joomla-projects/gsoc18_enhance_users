@@ -56,6 +56,8 @@ class HtmlView extends BaseHtmlView
 			// Store the events for later
 			$item->event = new \stdClass;
 
+			$item->text = '';
+
 			// TODO Don't know what this event does yet
 			$app->triggerEvent('onContentPrepare', array('com_users.user', &$item, &$item->params, 0));
 

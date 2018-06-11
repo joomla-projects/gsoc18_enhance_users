@@ -17,7 +17,7 @@ $lang  = JFactory::getLanguage();
 
 <div>
 	<?php foreach ($this->items as $item) : ?>
-		<?php echo $this->item->event->afterDisplayTitle; ?>
+		<?php echo $item->event->afterDisplayTitle; ?>
 		<div>
 			<?php echo $item->event->beforeDisplayContent; ?>
 

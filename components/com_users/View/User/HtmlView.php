@@ -21,7 +21,7 @@ use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 class HtmlView extends BaseHtmlView
 {
 	/**
-	 * The article object
+	 * The user object
 	 *
 	 * @var  \stdClass
 	 */
@@ -56,11 +56,37 @@ class HtmlView extends BaseHtmlView
 		$app        = \JFactory::getApplication();
 		$this->item  = $this->get('Item');
 		$this->state      = $this->get('State');
+		$user = \JFactory::getUser();
+
+		/**
+		 * Check for no 'access-view',
+		 * - Redirect guest users to login
+		 * - Deny access to logged users with 403 code
+		 */
+		if ($this->item->params->get('access-view') == false)
+		{
+			// TODO should I handle the guest?
+//			if ($user->get('guest'))
+//			{
+//				$return = base64_encode(\JUri::getInstance());
+//				$login_url_with_return = \JRoute::_('index.php?option=com_users&return=' . $return);
+//				$app->enqueueMessage(\JText::_('JERROR_ALERTNOAUTHOR'), 'notice');
+//				$app->redirect($login_url_with_return, 403);
+//			}
+//			else
+//			{
+				$app->enqueueMessage(\JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+				$app->setHeader('status', 403, true);
+
+				return;
+//			}
+		}
 
 		// Process the content plugins.
 		PluginHelper::importPlugin('content');
 		$offset = $this->state->get('list.offset');
 
+		$this->item = (object) $this->item;
 		// Store the events for later
 		$this->item->event = new \stdClass;
 

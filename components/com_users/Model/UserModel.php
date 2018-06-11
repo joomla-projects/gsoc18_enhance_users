@@ -11,6 +11,7 @@ namespace Joomla\Component\Users\Site\Model;
 defined('_JEXEC') or die;
 
 use Joomla\CMS\MVC\Model\ItemModel;
+use Joomla\CMS\User\User;
 
 /**
  * Public Profile model class for Users.
@@ -50,7 +51,7 @@ class UserModel extends ItemModel
 	 *
 	 * @param   integer  $pk  The id of the user.
 	 *
-	 * @return  object|boolean  Menu item data object on success, boolean false
+	 * @return  object  User instance
 	 *
 	 * @throws \Exception
 	 */
@@ -65,42 +66,21 @@ class UserModel extends ItemModel
 
 		if (!isset($this->_item[$pk]))
 		{
-			try
+			$user = User::getInstance($pk);
+
+			if (empty($user))
 			{
-				$db = $this->getDbo();
-				$query = $db->getQuery(true)
-					->select(
-						$this->getState(
-							'item.select', 'a.id, a.name, a.username, a.email'
-						)
-					);
-				$query->from('#__users AS a')
-					->where('a.id = ' . (int) $pk);
-
-				$db->setQuery($query);
-
-				$data = $db->loadObject();
-
-				if (empty($data))
-				{
-					throw new \Exception(\JText::_('COM_USERS_ERROR_USER_NOT_FOUND'), 404);
-				}
-
-				$this->_item[$pk] = $data;
+				throw new \Exception(\JText::_('COM_USERS_ERROR_USER_NOT_FOUND'), 404);
 			}
-			catch (\Exception $e)
-			{
-				if ($e->getCode() == 404)
-				{
-					// Need to go through the error handler to allow Redirect to work.
-					throw new \Exception($e->getMessage(), 404);
-				}
-				else
-				{
-					$this->setError($e);
-					$this->_item[$pk] = false;
-				}
-			}
+
+			$loggedUser = \JFactory::getUser();
+			$groups = $loggedUser->getAuthorisedViewLevels();
+			$user->params = $this->getState('params');
+
+			// Compute view access permissions.
+			$user->params->set('access-view', in_array($user->access, $groups));
+
+			$this->_item[$pk] = $user;
 		}
 
 		return $this->_item[$pk];

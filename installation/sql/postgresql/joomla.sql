@@ -1441,7 +1441,7 @@ CREATE TABLE IF NOT EXISTS "#__modules" (
   "asset_id" bigint DEFAULT 0 NOT NULL,
   "title" varchar(100) DEFAULT '' NOT NULL,
   "note" varchar(255) DEFAULT '' NOT NULL,
-  "content" text DEFAULT '' NOT NULL,
+  "content" text,
   "ordering" bigint DEFAULT 0 NOT NULL,
   "position" varchar(50) DEFAULT '' NOT NULL,
   "checked_out" integer DEFAULT 0 NOT NULL,
@@ -1977,7 +1977,7 @@ CREATE TABLE IF NOT EXISTS "#__users" (
   "otpKey" varchar(1000) DEFAULT '' NOT NULL,
   "otep" varchar(1000) DEFAULT '' NOT NULL,
   "requireReset" smallint DEFAULT 0,
-  "access" bigint DEFAULT 1 NOT NULL,
+  "access" bigint DEFAULT 0 NOT NULL,
   PRIMARY KEY ("id")
 );
 CREATE INDEX "#__users_idx_name" ON "#__users" ("name");

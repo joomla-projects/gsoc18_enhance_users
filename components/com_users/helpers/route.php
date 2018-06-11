@@ -200,9 +200,9 @@ abstract class UsersHelperRoute
 	/**
 	 * Method to get a route configuration for the user view
 	 *
-	 * @param   integer $id        The route of the user item.
-	 * @param   integer $groupId   The id of the group.
-	 * @param   integer $language  The language code.
+	 * @param   integer  $id        The route of the user item.
+	 * @param   integer  $groupId   The id of the group.
+	 * @param   integer  $language  The language code.
 	 *
 	 * @return  string  The user's route
 	 */

@@ -48,6 +48,7 @@ class UsersModel extends ListModel
 	}
 
 	/**
+	 *
 	 * @return \JDatabaseQuery|\Joomla\Database\DatabaseQuery
 	 */
 	protected function getListQuery()

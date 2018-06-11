@@ -20,7 +20,13 @@ use Joomla\CMS\MVC\Model\ItemModel;
 class UserModel extends ItemModel
 {
 	/**
+	 * Method to auto-populate the model state.
 	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @return  void
+	 *
+	 * @since   1.6
 	 */
 	protected function populateState()
 	{

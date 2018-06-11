@@ -11,6 +11,8 @@ namespace Joomla\Component\Users\Site\Model;
 defined('_JEXEC') or die;
 
 use Joomla\CMS\MVC\Model\ListModel;
+use \Joomla\CMS\Access\Access;
+use Joomla\CMS\Factory;
 
 /**
  * Model class for list of users.
@@ -51,11 +53,14 @@ class UsersModel extends ListModel
 	 * Get the list of items.
 	 *
 	 * @return \JDatabaseQuery|\Joomla\Database\DatabaseQuery
+	 *
+	 * @throws \Exception
 	 */
 	protected function getListQuery()
 	{
-		$app = \JFactory::getApplication();
-		$user = \JFactory::getUser();
+		$app = Factory::getApplication();
+		$user = Factory::getUser();
+//		$u = Access::getUsersByGroup((int)$this->getState('user.group'));
 
 		// Create a new query object.
 		$db    = $this->getDbo();

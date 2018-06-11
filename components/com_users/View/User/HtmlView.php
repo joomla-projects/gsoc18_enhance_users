@@ -11,7 +11,9 @@ namespace Joomla\Component\Users\Site\View\User;
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
+use Joomla\CMS\Language\Text;
 
 /**
  * Profile view class for Users.
@@ -53,10 +55,10 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null)
 	{
-		$app        = \JFactory::getApplication();
+		$app        = Factory::getApplication();
 		$this->item  = $this->get('Item');
 		$this->state      = $this->get('State');
-		$user = \JFactory::getUser();
+		$user = Factory::getUser();
 
 		/**
 		 * Check for no 'access-view',
@@ -70,12 +72,12 @@ class HtmlView extends BaseHtmlView
 //			{
 //				$return = base64_encode(\JUri::getInstance());
 //				$login_url_with_return = \JRoute::_('index.php?option=com_users&return=' . $return);
-//				$app->enqueueMessage(\JText::_('JERROR_ALERTNOAUTHOR'), 'notice');
+//				$app->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'notice');
 //				$app->redirect($login_url_with_return, 403);
 //			}
 //			else
 //			{
-				$app->enqueueMessage(\JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+				$app->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'error');
 				$app->setHeader('status', 403, true);
 
 				return;

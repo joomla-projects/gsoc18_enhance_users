@@ -10,9 +10,10 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Factory;
 
 \JLoader::register('UsersHelperRoute', JPATH_SITE . '/components/com_users/helpers/route.php');
-$lang  = JFactory::getLanguage();
+$lang  = Factory::getLanguage();
 ?>
 
 <div>

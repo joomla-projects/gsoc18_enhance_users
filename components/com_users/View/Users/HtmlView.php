@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\CMS\Factory;
 use Joomla\CMS\Application\ApplicationHelper;
 
 /**
@@ -44,7 +45,7 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null)
 	{
-		$app        = \JFactory::getApplication();
+		$app        = Factory::getApplication();
 		$this->items  = $this->get('Items');
 
 		PluginHelper::importPlugin('content');

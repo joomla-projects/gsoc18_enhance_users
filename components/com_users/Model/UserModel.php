@@ -12,6 +12,8 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\MVC\Model\ItemModel;
 use Joomla\CMS\User\User;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
 
 /**
  * Public Profile model class for Users.
@@ -31,7 +33,7 @@ class UserModel extends ItemModel
 	 */
 	protected function populateState()
 	{
-		$app = \JFactory::getApplication();
+		$app = Factory::getApplication();
 
 		// Load state from the request.
 		$pk = $app->input->getInt('id');
@@ -70,10 +72,10 @@ class UserModel extends ItemModel
 
 			if (empty($user))
 			{
-				throw new \Exception(\JText::_('COM_USERS_ERROR_USER_NOT_FOUND'), 404);
+				throw new \Exception(Text::_('COM_USERS_ERROR_USER_NOT_FOUND'), 404);
 			}
 
-			$loggedUser = \JFactory::getUser();
+			$loggedUser = Factory::getUser();
 			$groups = $loggedUser->getAuthorisedViewLevels();
 			$user->params = $this->getState('params');
 

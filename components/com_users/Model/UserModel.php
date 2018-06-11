@@ -51,6 +51,7 @@ class UserModel extends ItemModel
 	 * @param   integer  $pk  The id of the user.
 	 *
 	 * @return  object|boolean  Menu item data object on success, boolean false
+	 *
 	 * @throws \Exception
 	 */
 	public function getItem($pk = null)

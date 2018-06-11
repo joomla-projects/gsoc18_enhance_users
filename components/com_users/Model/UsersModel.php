@@ -15,7 +15,7 @@ use Joomla\CMS\MVC\Model\ListModel;
 /**
  * Model class for list of users.
  *
- * @since 4.0
+ * @since  4.0
  */
 class UsersModel extends ListModel
 {
@@ -48,6 +48,7 @@ class UsersModel extends ListModel
 	}
 
 	/**
+	 * Get the list of items.
 	 *
 	 * @return \JDatabaseQuery|\Joomla\Database\DatabaseQuery
 	 */

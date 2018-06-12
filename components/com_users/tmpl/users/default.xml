@@ -9,18 +9,10 @@
 		<fieldset name="request">
 			<field
 				name="id"
-				type="list"
-				label="User Groups"
-				description="Displays a list or users in a group">
-					<option value="1">Public</option>
-					<option value="2">Registered</option>
-					<option value="3">Author</option>
-					<option value="4">Editor</option>
-					<option value="5">Publisher</option>
-					<option value="6">Manager</option>
-					<option value="7">Administrator</option>
-					<option value="8">Super Users</option>
-					<option value="9">Guest</option>
+				type="usergrouplist"
+				label="COM_USERS_GROUP_LABEL"
+				default="1"
+			>
 			</field>
 		</fieldset>
 	</fields>

@@ -35,7 +35,6 @@ class UsersRouter extends RouterView
 	 */
 	public function __construct($app = null, $menu = null)
 	{
-
 		$this->registerView(new RouterViewConfiguration('login'));
 		$profile = new RouterViewConfiguration('profile');
 		$profile->addLayout('edit');

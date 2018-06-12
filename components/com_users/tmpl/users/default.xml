@@ -11,7 +11,6 @@
 				name="id"
 				type="usergrouplist"
 				label="COM_USERS_GROUP_LABEL"
-				default="1"
 			>
 			</field>
 		</fieldset>

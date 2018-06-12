@@ -59,7 +59,6 @@ class HtmlView extends BaseHtmlView
 
 			$item->text = '';
 
-			// TODO Don't know what this event does yet
 			$app->triggerEvent('onContentPrepare', array('com_users.user', &$item, &$item->params, 0));
 
 			$results = $app->triggerEvent('onContentAfterTitle', array('com_users.user', &$item, &$item->params, 0));

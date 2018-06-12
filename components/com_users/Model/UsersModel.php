@@ -42,9 +42,14 @@ class UsersModel extends ListModel
 	{
 		$app = \JFactory::getApplication();
 
-		// List state information
+		// Set the group id
 		$groupId = $app->input->get('id');
 		$this->setState('user.group', $groupId);
+
+		//Set the custom fields of the user
+		$customFields = $app->input->get('userCustomFields');
+		$this->setState('user.customFields', $customFields);
+		var_dump($customFields);
 
 		parent::populateState($ordering = 'ordering', $direction = 'ASC');
 	}

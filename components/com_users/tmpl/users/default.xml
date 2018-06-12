@@ -13,6 +13,20 @@
 				label="COM_USERS_GROUP_LABEL"
 			>
 			</field>
+
+			<field
+				name="userCustomFields"
+				type="sql"
+				multiple="multiple"
+				label="COM_USERS_CUSTOM_FIELDS_DEFAULT_LABEL"
+				description="COM_USERS_CUSTOM_FIELDS_DEFAULT_DESC"
+				sql_select="id, title"
+				sql_from="#__fields"
+				sql_where="`context` = 'com_users.user'"
+				sql_order="title ASC"
+				value_field="title"
+				key_field="id"
+			/>
 		</fieldset>
 	</fields>
 </metadata>

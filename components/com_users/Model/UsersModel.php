@@ -60,7 +60,8 @@ class UsersModel extends ListModel
 	{
 		$app = Factory::getApplication();
 		$user = Factory::getUser();
-//		$u = Access::getUsersByGroup((int)$this->getState('user.group'));
+
+		// $u = Access::getUsersByGroup((int)$this->getState('user.group'));
 
 		// Create a new query object.
 		$db    = $this->getDbo();

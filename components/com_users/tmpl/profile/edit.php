@@ -132,11 +132,12 @@ $lang->load('plg_user_profile', JPATH_ADMINISTRATOR);
 
 		<div class="com-users-profile__edit-submit control-group mt-2">
 			<button type="submit" class="btn btn-primary validate">
-				<span>
-					<?php echo Text::_('JSUBMIT'); ?>
-				</span>
+				<span class="fa fa-check" aria-hidden="true"></span>
+				<?php echo Text::_('JSAVE'); ?>
 			</button>
-			<a class="btn btn-danger" href="<?php echo Route::_('index.php?option=com_users&view=profile'); ?>" title="<?php echo Text::_('JCANCEL'); ?>"><?php echo Text::_('JCANCEL'); ?></a>
+			<a class="btn btn-danger" href="<?php echo Route::_('index.php?option=com_users&view=profile'); ?>" title="<?php echo Text::_('JCANCEL'); ?>">
+				<?php echo Text::_('JCANCEL'); ?>
+			</a>
 			<input type="hidden" name="option" value="com_users">
 			<input type="hidden" name="task" value="profile.save">
 		</div>

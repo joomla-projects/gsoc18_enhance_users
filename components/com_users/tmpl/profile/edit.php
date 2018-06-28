@@ -54,41 +54,47 @@ $lang->load('plg_user_profile', JPATH_ADMINISTRATOR);
 	</script>
 
 	<form id="member-profile" action="<?php echo Route::_('index.php?option=com_users&task=profile.save'); ?>" method="post" class="com-users-profile__edit-form form-validate form-horizontal well" enctype="multipart/form-data">
-		<fieldset>
 			<?php echo HTMLHelper::_('bootstrap.startTabSet', $this->tab_name, array('active' => 'core')); ?>
 				<?php // Iterate through the form fieldsets and display each one. ?>
 				<?php foreach ($this->form->getFieldsets() as $group => $fieldset) : ?>
 					<?php $fields = $this->form->getFieldset($group); ?>
 					<?php if (count($fields)) : ?>
 						<?php echo HTMLHelper::_('bootstrap.addTab', $this->tab_name, $group, Text::_($fieldset->label)); ?>
-							<?php // Iterate through the fields in the set and display them. ?>
-							<?php foreach ($fields as $field) : ?>
-							<?php // If the field is hidden, just display the input. ?>
-								<?php if ($field->hidden) : ?>
-									<?php echo $field->input; ?>
-								<?php else : ?>
-									<div class="control-group">
-										<div class="control-label">
-											<?php echo $field->label; ?>
-											<?php if (!$field->required && $field->type !== 'Spacer') : ?>
-												<span class="optional">
-													<?php echo Text::_('COM_USERS_OPTIONAL'); ?>
-												</span>
-											<?php endif; ?>
-										</div>
-										<div class="controls">
-											<?php echo $field->input; ?>
-										</div>
-									</div>
+							<fieldset>
+								<?php if (isset($fieldset->description) && trim($fieldset->description)) : ?>
+									<p>
+										<?php echo $this->escape(Text::_($fieldset->description)); ?>
+									</p>
 								<?php endif; ?>
-							<?php endforeach; ?>
+								<?php // Iterate through the fields in the set and display them. ?>
+								<?php foreach ($fields as $field) : ?>
+								<?php // If the field is hidden, just display the input. ?>
+									<?php if ($field->hidden) : ?>
+										<?php echo $field->input; ?>
+									<?php else : ?>
+										<div class="control-group">
+											<div class="control-label">
+												<?php echo $field->label; ?>
+												<?php if (!$field->required && $field->type !== 'Spacer') : ?>
+													<span class="optional">
+														<?php echo Text::_('COM_USERS_OPTIONAL'); ?>
+													</span>
+												<?php endif; ?>
+											</div>
+											<div class="controls">
+												<?php echo $field->input; ?>
+											</div>
+										</div>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</fieldset>
 						<?php echo HTMLHelper::_('bootstrap.endTab'); ?>
 					<?php endif; ?>
 				<?php endforeach; ?>
 
 				<?php if (count($this->twofactormethods) > 1) : ?>
 					<?php echo HTMLHelper::_('bootstrap.addTab', $this->tab_name, 'twofactor', Text::_('COM_USERS_PROFILE_TWO_FACTOR_AUTH')); ?>
-						<div class="com-users-profile__twofactor">
+						<fieldset class="com-users-profile__twofactor">
 							<div class="com-users-profile__twofactor-method control-group">
 								<div class="control-label">
 									<label id="jform_twofactor_method-lbl" for="jform_twofactor_method" class="hasTooltip"
@@ -108,11 +114,11 @@ $lang->load('plg_user_profile', JPATH_ADMINISTRATOR);
 									</div>
 								<?php endforeach; ?>
 							</div>
-						</div>
+						</fieldset>
 					<?php echo HTMLHelper::_('bootstrap.endTab'); ?>
 
 					<?php echo HTMLHelper::_('bootstrap.addTab', $this->tab_name, 'onetimepass', Text::_('COM_USERS_PROFILE_OTEPS')); ?>
-						<div class="com-users-profile__oteps">
+						<fieldset class="com-users-profile__oteps">
 							<joomla-alert type="info"><?php echo Text::_('COM_USERS_PROFILE_OTEPS_DESC'); ?></joomla-alert>
 							<?php if (empty($this->otpConfig->otep)) : ?>
 								<joomla-alert type="warning"><?php echo Text::_('COM_USERS_PROFILE_OTEPS_WAIT_DESC'); ?></joomla-alert>
@@ -124,18 +130,17 @@ $lang->load('plg_user_profile', JPATH_ADMINISTRATOR);
 								<?php endforeach; ?>
 								<div class="clearfix"></div>
 							<?php endif; ?>
-						</div>
+						</fieldset>
 					<?php echo HTMLHelper::_('bootstrap.endTab'); ?>
 				<?php endif; ?>
 			<?php echo HTMLHelper::_('bootstrap.endTabSet'); ?>
-		</fieldset>
 
 		<div class="com-users-profile__edit-submit control-group mt-2">
 			<button type="submit" class="btn btn-primary validate">
 				<span class="fa fa-check" aria-hidden="true"></span>
 				<?php echo Text::_('JSAVE'); ?>
 			</button>
-			<a class="btn btn-danger" href="<?php echo Route::_('index.php?option=com_users&view=profile'); ?>" title="<?php echo Text::_('JCANCEL'); ?>">
+			<a class="btn btn-danger" href="index.php?option=com_users&view=profile" title="<?php echo Text::_('JCANCEL'); ?>">
 				<?php echo Text::_('JCANCEL'); ?>
 			</a>
 			<input type="hidden" name="option" value="com_users">
